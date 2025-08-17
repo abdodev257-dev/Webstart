@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>محرر </title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #fff;
+    }
+    header {
+      background: #1f1f1f;
+      padding: 15px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      color: cyan;
+      border-bottom: 1px solid #333;
+    }
+      :root {
+    --bg: #121212;
+    --text: #ffffff;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    transition: 0.3s;
+  }
+
+  .toggle-btn {
+    position: fixed;
+    top: 10px;
+    background: transparent;
+    color: var(--text);
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
+    z-index: 999;
+  }
+    .menu-btn {
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      background: cyan;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+     .sidebar {
+  position: fixed;
+  top: 50;
+  left: -250px;
+  width: 200px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: left 0.3s;
+  padding: 20px;
+  
+
+    }
+    .sidebar a {
+      display: block;
+      color: white;
+      background-color: #4545459f;
+      margin: 10px 0;
+      border-radius: 20px;
+      text-align: center;
+      padding: 5px;
+      text-decoration: none;
+    }
+    .sidebar a:hover {
+  background-color: #606060;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transform: scale(1.05);
+}
+
+    .main-buttons {
+      text-align: center;
+      margin-top: 10px;
+    }
+   .main-buttons button {
+  margin: 15px auto;
+  display: flex;
+  width: 240px;
+  align-items: center;
+  padding: 10px 30px;
+  font-size: 20px;
+  border: none;
+  border-radius: 8px;
+  background: cyan;
+  color: black;
+  transition: background 0.3s, transform 00.2s;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.main-buttons button:hover {
+  background-color: #00acc1;
+  transform: scale(1.05);
+}
+    #aboutContent {
+  
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+#aboutContent h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: cyan;
+  margin-bottom: 10px;
+}
+
+#aboutContent p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+    #servicesContent {
+  padding: 20px;
+}
+
+#servicesContent h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: cyan;
+  margin-bottom: 10px;
+}
+
+#servicesContent p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+#servicesContent .service {
+  background-color: #1f1f1f;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  margin-bottom: 20px;
+}
+
+#servicesContent .service h3 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+#contactContent {
+  padding: 20px;
+  text-align: center;
+}
+
+#contactContent h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: cyan;
+  margin-bottom: 10px;
+}
+
+#contactContent button {
+  background-color: red;
+  color: #fff;
+  font-weight: bold;
+  width: 200px;
+  margin: 5px auto;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#contactContent button.facebook {
+  background-color: #1877f2;
+  color: #fff;
+}
+
+
+  </style>
+  </head>
+<body>
+
+<header>
+    welcome to develop 
+</header>
+<button class="toggle-btn" id="themeToggle" onclick="toggleTheme()">🌙</button>
+<button class="menu-btn" onclick="toggleSidebar()">☰</button>
+
+<div class="sidebar" id="sidebar">
+  <a href="#" onclick="showHome()">الرئيسية</a>
+  <a href="#" onclick="showAbout()">عن الموقع</a>
+   <a href="#" onclick="showServices()">الخدمات</a>
+                <a href="#" onclick="showContact()">الاتصال</a>
+</div>
+   <div id="homeContent">
+<div class="main-buttons">
+  <button onclick="location.href='lessons.html'">📘 دروس تعليمية</button>
+  <button onclick="location.href='editor.html'">💻 كتابة الكود</button>
+  <button onclick="location.href='library.html'">📚 تحميل مكتبة</button>
+</div>
+</div>
+   <div id="aboutContent" style="display:none;">
+                <h2>معلومات عن الموقع</h2>
+<p>عن الموقع:</p>
+<p> مرحباً بك في منصّة تعلم البرمجة التفاعلية!  
+يهدف هذا الموقع إلى مساعدة المبتدئين على فهم أساسيات تطوير الويب من خلال:
+</p>
+<li>دروس مبسطة وشاملة في HTML، CSS، وJavaScript  </li>
+<li>محرر كود مدمج لكتابة وتجربة الكود مباشرة  </li>
+<li>أمثلة عملية وعرض فوري للنتائج</li>  
+<li>أدوات مساعدة ووسوم جاهزة لتسهيل التعلم</li>
+<p>تم تصميم الموقع بأسلوب بسيط وعملي، يجمع بين التعليم والتطبيق في مكان واحد.  
+ابدأ رحلتك البرمجية الآن!</p>
+                
+            </div>
+             <div id="servicesContent" style="display:none;">
+                <h2>خدماتنا</h2>
+<p>الخدمات:</p>
+<li>دروس تفاعلية: شرح مبسط لأهم عناصر HTML وCSS وJavaScript.</li>
+ <li>محرر كود مباشر: كتابة الكود ومعاينة النتيجة في نفس اللحظة.</li>
+ <li>أمثلة جاهزة: أكواد جاهزة للتعديل والتجربة.</li>
+ <li>مكتبة وسوم: أزرار تعرض أهم الوسوم والخصائص عند الحاجة.</li>
+ <li>تصميم متجاوب: واجهات مريحة وسهلة الاستخدام على الهاتف والحاسوب.</li>
+ <li>تعلم بدون تسجيل: لا حاجة لإنشاء حساب لبدء التعلم.</li>
+ <li>دعم مستمر: تحديثات متواصلة لإضافة دروس وأدوات جديدة.</li>
+                </div>
+     <div id="contactContent" style="display:none;">
+                <h2>اتصل بنا</h2>
+                <p>يمكنك الاتصال بنا عن طريق فيسبوك او متابعتنا علا يوتيوب</p>
+                
+              <button class="facebook" onclick="window.open('https://www.facebook.com/profile.php?id=61561506131894', '_blank')">
+  <i class="fab fa-facebook"></i>
+  <span class="icon-label">Facebook</span>
+</button>
+
+                
+              <div class="b2">  <button>
+                      <i class="fab fa-youtube"></i>
+            <span class="icon-label">YouTube</span
+                </button>
+                </div>
+<script>
+  function toggleSidebar() {
+    const bar = document.getElementById("sidebar");
+    bar.style.left = bar.style.left === "0px" ? "-250px" : "0px";
+  }
+  function showAbout() {
+            document.getElementById("homeContent").style.display = "none";
+            document.getElementById("aboutContent").style.display = "block";
+            document.getElementById("servicesContent").style.display = "none";
+            document.getElementById("contactContent").style.display = "none";
+        }
+        function showHome() {
+            document.getElementById("aboutContent").style.display = "none";
+            document.getElementById("homeContent").style.display = "block";
+            document.getElementById("servicesContent").style.display = "none";
+            document.getElementById("contactContent").style.display = "none";
+        }
+        function showServices() {
+            document.getElementById("aboutContent").style.display = "none";
+            document.getElementById("homeContent").style.display = "none";
+            document.getElementById("servicesContent").style.display = "block";
+            document.getElementById("contactContent").style.display = "none";
+        }
+
+        function showContact() {
+            document.getElementById("aboutContent").style.display = "none";
+            document.getElementById("homeContent").style.display = "none";
+            document.getElementById("servicesContent").style.display = "none";
+            document.getElementById("contactContent").style.display = "block";
+        }
+        
+        
+  const btn = document.getElementById("themeToggle");
+
+  function applyTheme(mode) {
+    if (mode === "light") {
+      document.documentElement.style.setProperty("--bg", "#ffffff");
+      document.documentElement.style.setProperty("--text", "#000000");
+      btn.textContent = "🌙";
+    } else {
+      document.documentElement.style.setProperty("--bg", "#121212");
+      document.documentElement.style.setProperty("--text", "#ffffff");
+      btn.textContent = "☀️";
+    }
+  }
+
+  function toggleTheme() {
+    const current = localStorage.getItem("theme") || "dark";
+    const next = current === "dark" ? "light" : "dark";
+    localStorage.setItem("theme", next);
+    applyTheme(next);
+  }
+
+  // عند تحميل الصفحة
+  applyTheme(localStorage.getItem("theme") || "dark");
+</script>
+
+</body>
+</html>
