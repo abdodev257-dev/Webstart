@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>إخفاء واسترجاع نص من صورة</title>
+  <style>
+    body { font-family: Arial; background: #111; color: white; text-align: center; padding: 20px; }
+    canvas { display: none; }
+    input, textarea, button { margin: 10px; padding: 10px; width: 90%; max-width: 400px; }
+    img { max-width: 300px; margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+  <h2>📥 إخفاء النص في الصورة</h2>
+  <input type="file" id="imageInput">
+  <textarea id="textToHide" rows="4" placeholder="أدخل النص هنا..."></textarea>
+  <button onclick="hideText()">🔐 إخفاء النص</button>
+  <br>
+  <canvas id="canvas"></canvas>
+  <br>
+  <button onclick="downloadImage()">💾 تحميل الصورة المعدلة</button>
+  <img id="preview" />
+
+  <hr style="margin: 40px 0;">
+
+  <h2>📤 استخراج النص من صورة</h2>
+  <input type="file" id="extractInput">
+  <button onclick="extractText()">📄 استخراج النص</button>
+  <p id="extractedText"></p>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    function hideText() {
+      const file = document.getElementById('imageInput').files[0];
+      const text = document.getElementById('textToHide').value + '|||'; // نهاية النص
+      if (!file || !text) return alert("يرجى اختيار صورة وإدخال نص.");
+
+      const reader = new FileReader();
+      reader.onload = function () {
+        const img = new Image();
+        img.onload = function () {
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
+          const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          const data = imageData.data;
+
+          let textIndex = 0;
+          for (let i = 0; i < data.length && textIndex < text.length; i += 4) {
+            data[i] = text.charCodeAt(textIndex); // نضع الحرف في اللون الأحمر
+            textIndex++;
+          }
+
+          ctx.putImageData(imageData, 0, 0);
+          document.getElementById('preview').src = canvas.toDataURL();
+        };
+        img.src = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function downloadImage() {
+      const a = document.createElement('a');
+      a.href = canvas.toDataURL();
+      a.download = 'hidden-text-image.png';
+      a.click();
+    }
+
+    function extractText() {
+      const file = document.getElementById('extractInput').files[0];
+      if (!file) return alert("اختر صورة.");
+
+      const reader = new FileReader();
+      reader.onload = function () {
+        const img = new Image();
+        img.onload = function () {
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
+          const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          const data = imageData.data;
+
+          let chars = [];
+          for (let i = 0; i < data.length; i += 4) {
+            let char = String.fromCharCode(data[i]);
+            if (char === '|' && chars.slice(-2).join('') === '||') break;
+            chars.push(char);
+          }
+
+          document.getElementById('extractedText').innerText = chars.join('').replace('||', '');
+        };
+        img.src = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  </script>
+</body>
+</html>
